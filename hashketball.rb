@@ -128,3 +128,102 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player)
+  game = game_hash
+  points = 0
+  game.each do |team,team_data|
+    player_index = 0
+    while player_index < team_data[:players].length
+      if player == team_data[:players][player_index][:player_name]
+        points = team_data[:players][player_index][:points]
+      end
+      player_index += 1
+    end
+  end
+  return points
+end
+
+
+def shoe_size(player)
+  game = game_hash
+  shoe_size = 0
+  game.each do |team,team_data|
+    player_index = 0
+    while player_index < team_data[:players].length
+      if player == team_data[:players][player_index][:player_name]
+        shoe_size = team_data[:players][player_index][:shoe]
+      end
+      player_index += 1
+    end
+  end
+  return shoe_size
+end
+
+
+def team_colors(team_name)
+  game = game_hash
+  colors = []
+  game.each do |team,team_details|
+    if team_name == team_details[:team_name]
+      colors = team_details[:colors]
+    end
+  end
+  return colors
+end
+
+def team_names
+  game = game_hash
+  team_names = []
+  game.each do |team,team_details|
+    team_names << team_details[:team_name] 
+  end
+  return team_names
+end
+
+def player_numbers(team_name)
+  game = game_hash
+  player_numbers = []
+  game.each do |team,team_details|
+    if team_name == team_details[:team_name]
+      player_index = 0
+      while player_index < team_details[:players].length
+        player_numbers << team_details[:players][player_index][:number]      
+        player_index += 1
+      end
+    end
+  end
+  return player_numbers
+end
+
+def player_stats(player)
+game = game_hash
+stats = {}
+game.each do |team,team_data|
+  player_index = 0
+  while player_index < team_data[:players].length
+    if player == team_data[:players][player_index][:player_name]
+      stats = team_data[:players][player_index]
+    end
+    player_index += 1
+  end
+end
+return stats
+end
+
+def big_shoe_rebounds
+  game = game_hash
+  biggest_shoe = 0
+  big_shoe_rebounds = 0
+  game.each do |team,team_data|
+    player_index = 0
+    while player_index < team_data[:players].length
+      if team_data[:players][player_index][:shoe] > biggest_shoe
+        biggest_shoe = team_data[:players][player_index][:shoe]
+        big_shoe_rebounds = team_data[:players][player_index][:rebounds] 
+      end
+      player_index += 1
+    end
+  end
+  return big_shoe_rebounds
+end
