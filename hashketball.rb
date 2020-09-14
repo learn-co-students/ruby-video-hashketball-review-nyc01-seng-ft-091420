@@ -127,4 +127,90 @@ def game_hash
   }
 end
 
-# Write code here
+def players_only
+  players = game_hash.keys.map do |team|
+    game_hash[team][:players]
+  end
+  players.flatten
+end
+
+
+def num_points_scored(player_name)
+  player_in_question = players_only.find do |player|
+    player[:player_name] == player_name
+  end
+  player_in_question[:points]
+end
+
+def shoe_size(player_name)
+  player_in_question = players_only.find do |player|
+    player[:player_name] == player_name
+  end
+  player_in_question[:shoe]
+end
+
+def team_names
+  game_hash.map do |team, team_identity|
+    team_identity[:team_name]
+  end
+end
+
+def team_colors(team_name)
+  game_hash.map do |matchup, info|
+    while info[:team_name] == team_name
+      return info[:colors]
+    end
+  end
+end
+
+def player_numbers(team_name)
+  jersey_numbers = []
+  game_hash.each do |matchup, info|
+    if info[:team_name] == team_name
+      info[:players].each do |jersey|
+        jersey[:number]
+        jersey_numbers.push(jersey[:number])
+      end
+    end
+  end
+  jersey_numbers
+end
+
+def player_stats(player_in_question)
+    game_hash.each do |matchup, info|
+      info[:players].each do |player_stats|
+        if player_stats[:player_name] == player_in_question
+          return player_stats
+        end
+      end
+    end
+  end
+
+def big_shoe_rebounds
+  rebounds = 0
+  big_shoe = 0
+  game_hash.each do |matchup, info|
+    info[:players].each do |name|
+      if name[:shoe] > big_shoe
+        big_shoe = name[:shoe]
+        rebounds = name[:rebounds]
+      end
+    end
+  end
+  rebounds
+end
+
+
+def most_points_scored
+
+
+end
+
+def winning_team
+
+end
+
+def player_with_longest_name
+  players_only.max_by { |name| name.length }
+  name.length
+end
